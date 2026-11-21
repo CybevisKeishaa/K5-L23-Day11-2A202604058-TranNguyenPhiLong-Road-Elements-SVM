@@ -33,10 +33,16 @@ Cách đặt tag ảnh trên bản CVAT này: dùng công cụ Tag ở thanh bê
 | B11 | (để trống) | Vẽ drivable cho lối đi trong bãi đỗ hay để trống | Không vẽ shape; chỉ đặt 4 tag | Ảnh camera lùi vào ô đỗ cho người khuyết tật. Ô đỗ nằm ngoài phạm vi Road v1.0 (guideline mục 0, chuyển sang v1.x ở Ngày 20); ảnh không có vạch làn hay vạch qua đường |
 
 ## 4. Phiếu QC 1 nhận được
-Bạn kiểm lô của tôi: __  Quyết định nhận được: __  
+Bạn kiểm lô của tôi: Phạm Phú Nguyên Hùng (2A202604062), phiếu `submit/phamphunguyenhung-qc1-for-trannguyenphilong.md` trong repo của bạn  Quyết định nhận được: **Hold** (0 lỗi nặng xác nhận, 2 nghi vấn mức chính / 279 nhãn = 0,7 %, 5 ca chờ lead)  
 | Mã lỗi | Số lỗi | Đồng ý? | Đã sửa? |
 | --- | ---: | --- | --- |
-|  |  |  |  |
+| QC1-02 (A05 L1 + R1, A07 L1, A12 R1) | 3 ảnh (nghi vấn) | Không. Ba ảnh này không có vệt sơn ở phía bị thiếu: A05 là phố không kẻ vạch, A07 bên trái là dải bê tông, A12 bên phải chỉ có lề và xe đỗ. Vẽ thêm vạch sẽ thành nhãn thừa (QC1-03). Lý do đã ghi ở mục 3; chờ coach xác nhận để được miễn. | Không sửa (giữ nguyên theo guideline) |
+| QC1-03 / QC1-04 (A12 lane L1 #11) | 1 (nghi vấn) | Một phần. Đây là vạch đứt trắng thật sau vạch qua đường, không phải nhãn thừa (phóng to thấy rõ các đoạn đứt). Nhưng polyline dừng ở y ≈ 400, trong khi đoạn đứt còn thấy tới khoảng (542,380). | Chưa: kéo dài L1 tới đoạn đứt xa nhất rồi export lại |
+| QC1-04 (A06 lane L1 #7) | 1 (nghi vấn) | Có. Vạch vàng còn thấy thêm khoảng 10 px ở hai đầu: bắt đầu từ khoảng (428,416) và kéo tới khoảng (478,393). Polyline hiện tại đi từ (442,416) tới (470,399). | Chưa: nối dài hai đầu rồi export lại |
+| QC1-04 (A07 lane R2 #1) | 1 (nghi vấn) | Không. Polyline 23 điểm bám đúng tâm vạch trắng chạy dọc bánh xe tải, từ (1199,453) tới (797,294); vạch nằm sát xe tải nên trông như đi qua bánh xe. Khi phóng to để kiểm, tôi lại tự phát hiện vạch này có vẻ là vạch **liền**, trong khi đang gán `style = dashed` (QC1-06, phiếu không ghi). | Chưa: mở lại A07 trên CVAT, đổi `style` nếu đúng là vạch liền |
+| QC1-11 / QC1-07 (B11 chưa có shape) | 1 (ca mơ hồ) | Không. B11 là camera lùi vào ô đỗ cho người khuyết tật; ô đỗ nằm ngoài phạm vi Road v1.0 và ảnh không có vạch làn hay vạch qua đường (đã ghi ở mục 3). Chờ lead xác nhận. | Không sửa |
+
+Phản hồi về phiếu: bạn đã kiểm đủ 28 ảnh ở mức dữ liệu nhưng chỉ xem overlay 5 ảnh, và để "chưa kiểm" ở QC1-05, 06, 08, 09, 10. Lỗi QC1-06 ở A07 mà tôi tự tìm ra thuộc đúng nhóm chưa kiểm này. Sau khi sửa ba polyline trên (A06, A12, A07), tôi export lại và nộp `--revision 2`.
 
 ## 5. Kiểm file export
 | File | Mở lại được? | Số shape ảnh 1 (job / file) | Số shape ảnh 2 (job / file) | Tag camera có trong XML? |
