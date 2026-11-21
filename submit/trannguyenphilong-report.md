@@ -90,8 +90,10 @@ Lỗi đã sửa thật: L1 ở A12 dừng ở y = 400, trong khi vạch đứt 
 | y | 720 | 680 | 640 | 600 | 560 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | x của chúng tôi | không có làn | 666.8 | 598.8 | 542.1 | 484.1 |
-| x của bạn kia |  |  |  |  |  |
+| x của bạn kia | không có làn | không có làn | 597.5 | 539.9 | 484.0 |
+
+Dòng "bạn kia" lấy từ bản sửa của phamphunguyenhung (`phamphunguyenhung-front.zip` gửi ngày 21/11), cùng lệnh `rowanchor --image A01`. Bản đầu của bạn chưa có R1 ở A01: vạch này bị gán `L1`, đã ghi trong phiếu QC 1.
 
 1. Polyline R1 của A01 bắt đầu ở y = 717.7 nên hàng 720 đã là "không có làn", và kết thúc ở y = 523.8. Nếu dừng sớm 40 px (điểm cuối khoảng y = 563.8) thì hàng **560** đổi thành "không có làn". Các hàng 680, 640, 600 vẫn còn.
-2. *(Điền sau khi có file của bạn được kiểm.)*
+2. Ở **hàng 720** không đo được độ lệch, vì cả hai đều là "không có làn": polyline của tôi bắt đầu ở y = 717.7, của bạn ở y = 672.9. Ở **hàng 560**, hai bạn gần như trùng nhau: 484.1 và 484.0, lệch 0.1 px. Khác biệt thật nằm ở phía gần xe. Bạn bắt đầu R1 ở đoạn đứt gần nhất (645,673). Tôi kéo polyline qua khoảng hở tới (728,718), dù dưới y ≈ 680 không thấy vệt sơn nào. Vì vậy hàng **680** của bạn là "không có làn", còn của tôi là x = 666.8. Guideline không nói rõ có kéo qua khoảng hở ở đầu gần xe hay không, nên đây là khác biệt về cách vẽ, không ai sai rõ ràng. Ở hàng 640 hai bạn lệch 1.3 px (598.8 và 597.5). Phần thiếu ở hàng gần xe ảnh hưởng LKA nhiều hơn. Hàng gần xe quyết định khoảng cách ngang từ xe tới biên làn, là đại lượng LKA dùng trực tiếp để giữ xe trong làn. Hàng xa chủ yếu cho hướng và độ cong phía trước, nên lệch 0.1 px ở hàng 560 gần như không có tác động.
 3. Giá trị x không đổi, vì `rowanchor` nội suy tuyến tính giữa hai điểm kẹp hàng y, không phụ thuộc thứ tự điểm. Chỗ gặp khó là `road_check`: nó kiểm chiều "gần ra xa" (QC1-04) và sẽ báo lỗi. `rowanchor` cũng in cảnh báo "vẽ từ xa về gần". Ngoài ra, script nào coi điểm đầu là điểm gần xe nhất (để nối dài vạch xuống đáy ảnh hay lấy điểm xuất phát của làn) sẽ lấy nhầm đầu xa.
